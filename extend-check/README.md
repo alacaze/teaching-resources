@@ -1,7 +1,7 @@
 # Extend Course Component Map & Link Checker
 
->[NOTE!]
->The most of the script and these notes have been by Gemini output.
+>[!NOTE]
+>The most of the script and these notes have been provided by Gemini output.
 
 An automation script written in R designed to parse unzipped edX course export archives. It extracts full course lineage (Sections, Subsections, and Units), maps content types, and systematically validates embedded hyperlinks across HTML content pages and quizzes.
 
@@ -50,6 +50,12 @@ The idea is that you can use the spreadsheet to identify and review course compo
 
 Filtering for the content you want and then working back along the row will identify the Section/Subsection/Unit that contains the component.
 
+
+---
+
+>[!NOTE]
+>Instructions if you want to use the script.
+
 ## Prerequisites
 
 Ensure you have R installed on your system along with the following mandatory packages:
@@ -76,6 +82,6 @@ Rscript extend-check.R 20251217_PHRM3101
 
 ```
 
-> [NOTE!]
+> [!NOTE]
 > If no arguments are passed, the script will provide an error message and stop execution
 
