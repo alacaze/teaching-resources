@@ -12,16 +12,12 @@ An automation script written in R designed to parse unzipped edX course export a
 * **HTML Pages:** Scraped for standard hyperlinks (`href` and `src`).
 * **Edx Problems:** Identifies quiz/assessment elements, classifies them by their human-readable item titles (`link_type`), and safely sweeps problem XML structures for embedded links.
 * **Video Embeds:** Bypasses missing file layers to extract and report specific YouTube ID strings.
-* **LTI Tool Integrations:** Captures and prints inline `launch_url` external parameters right in your matrix.
-
-
+* **LTI Tool Integrations:** Captures and prints inline `launch_url` external parameters to the spreadsheet.
 * **Smart Link Classification:** Categorizes destinations dynamically into explicit categories such as **H5P Content**, **UQ Library Resources**, **Library Proxy/Databases (e.g., AMH, EZproxy)**, **Echo360 Video Links**, and internal course paths.
 * **Live Auditing Engine:** Performs automated asynchronous `HEAD` requests to verify live destination URLs, capturing server status codes (e.g., `200`, `404`) while using a custom user-agent to prevent false security blocks.
 
 
-The idea is that you can use
 
----
 
 ## Output Architecture
 
@@ -37,7 +33,22 @@ The script generates a cleanly structured CSV spreadsheet named `[Your_Course_Fo
 | `target_destination` | The checked URL string, the inline LTI endpoint, or the embedded YouTube Asset ID. |
 | `status` | The HTTP live status response code (e.g., `200` = OK; `404` = Broken). |
 
----
+
+
+## Intended use
+
+The idea is that you can use the spreadsheet to identify and review course components, e.g.:
+
+* Filter `status` to identify dead links via the [HTTP status code](https://en.wikipedia.org/wiki/List_of_HTTP_status_codes); for example `200` means the link is fine; `404` is a dead link; `403` typically means that some authenication is required prior to access
+* Filter `item_display_name` to
+	* Find all video components in the course and the associated youtube id/link
+	* Find and review Edx Problems
+* H5P content can be found in more than one place depending on how it has been embedded into the course
+	* `link_type`: "H5P Content" or
+	* `item_display_name`: "External Tool Link"
+* Review static resource links via `link_type`: "External edX Asset (Static)"
+
+Filtering for the content you want and then working back along the row will identify the Section/Subsection/Unit that contains the component.
 
 ## Prerequisites
 
